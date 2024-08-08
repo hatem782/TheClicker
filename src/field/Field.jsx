@@ -22,6 +22,10 @@ function Field() {
     }
   }, [position]);
 
+  const Reset = () => {
+    setPosition(0);
+  };
+
   useEffect(() => {
     // if we click on "a" key, Player 1 will move
     // if we click on "m" key, Player 2 will move
@@ -47,19 +51,24 @@ function Field() {
         style={{ width: `${100 + position}%` }}
         onClick={Player1Click}
       >
-        <span>CLICK</span>
+        <span>{100 + position}</span>
       </div>
       <div
         className="player2"
         style={{ width: `${100 - position}%` }}
         onClick={Player2Click}
       >
-        <span>CLICK</span>
+        <span>{100 - position}</span>
       </div>
 
-      <div className="score">
-        <span>Player 1: {100 + position} </span>
-        <span>Player 2: {100 - position} </span>
+      <div
+        style={{
+          right: `${50 - position / 2}%`,
+        }}
+        className="score"
+        onClick={Reset}
+      >
+        <span className="reset">RESET</span>
       </div>
     </div>
   );
