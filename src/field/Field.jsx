@@ -26,15 +26,19 @@ function Field() {
     // if we click on "a" key, Player 1 will move
     // if we click on "m" key, Player 2 will move
     const handleKeyDown = (e) => {
+      console.log(e.key);
       if (e.key === "a") {
+        // alert("a");
         Player1Click();
       } else if (e.key === "m") {
+        // alert("m");
         Player2Click();
       }
+      window.removeEventListener("keypress", handleKeyDown);
     };
 
-    window.addEventListener("keypressa", handleKeyDown);
-  }, [position, Player1Click, Player2Click]);
+    window.addEventListener("keypress", handleKeyDown);
+  }, [position]);
 
   return (
     <div className="field">
