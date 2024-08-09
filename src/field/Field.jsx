@@ -4,6 +4,7 @@ import "./field.css";
 function Field({ socket }) {
   const [player, setPlayer] = useState(-1);
   const [position, setPosition] = useState(0);
+  const [canPlay, setCanPlay] = useState(false);
 
   useEffect(() => {
     socket.on("player", (resp) => {
@@ -15,15 +16,19 @@ function Field({ socket }) {
       console.log("resp", resp);
       setPosition(resp);
     });
+
+    socket.on("start", (resp) => {
+      setCanPlay(resp);
+    });
   }, [socket]);
 
   const Player1Click = () => {
-    if (player !== 1) return;
+    if (player !== 1 && canPlay) return;
     socket.emit("click");
   };
 
   const Player2Click = () => {
-    if (player !== 2) return;
+    if (player !== 2 && canPlay) return;
     socket.emit("click");
   };
 
@@ -44,6 +49,9 @@ function Field({ socket }) {
   useEffect(() => {
     // if we click on space
     const handleKeyDown = (e) => {
+      if (e.key === "d") {
+        socket.emit("click");
+      }
       if (e.key === " " || e.key === "Spacebar") {
         socket.emit("click");
       }
@@ -51,10 +59,10 @@ function Field({ socket }) {
       //   // alert("m");
       //   Player2Click();
       // }
-      window.removeEventListener("keypress", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyDown);
     };
 
-    window.addEventListener("keypress", handleKeyDown);
+    window.addEventListener("keyup", handleKeyDown);
   }, [position]);
 
   return (
