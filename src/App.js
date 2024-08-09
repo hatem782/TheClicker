@@ -8,7 +8,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io(`http://localhost:3004`);
+    const newSocket = io(`https://the-clicker.watch-tg.me`);
     setSocket(newSocket);
     console.log("newSocket", newSocket);
     return () => newSocket.close();
