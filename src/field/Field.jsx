@@ -52,11 +52,13 @@ function Field({ socket }) {
       if (e.key === "Spacebar" || e.key === " ") {
         socket.emit("click");
       }
-
-      window.removeEventListener("keyup", handleKeyDown);
     };
 
     window.addEventListener("keyup", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keyup", handleKeyDown);
+    };
   }, []);
 
   return (
