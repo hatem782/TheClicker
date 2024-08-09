@@ -1,43 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./field.css";
 
-function Field() {
+function Field({ socket }) {
+  const [player, setPlayer] = useState(-1);
   const [position, setPosition] = useState(0);
 
+  useEffect(() => {
+    socket.on("player", (resp) => {
+      alert(`You are player ${resp}`);
+      setPlayer(resp);
+    });
+
+    socket.on("position", (resp) => {
+      console.log("resp", resp);
+      setPosition(resp);
+    });
+  }, [socket]);
+
   const Player1Click = () => {
-    setPosition(position + 5);
+    if (player !== 1) return;
+    socket.emit("click");
   };
 
   const Player2Click = () => {
-    setPosition(position - 5);
+    if (player !== 2) return;
+    socket.emit("click");
   };
 
   useEffect(() => {
     if (position > 100) {
       alert("Player 1 wins!");
-      setPosition(0);
+      Reset();
     } else if (position < -100) {
       alert("Player 2 wins!");
-      setPosition(0);
+      Reset();
     }
   }, [position]);
 
   const Reset = () => {
-    setPosition(0);
+    socket.emit("reset");
   };
 
   useEffect(() => {
-    // if we click on "a" key, Player 1 will move
-    // if we click on "m" key, Player 2 will move
+    // if we click on space
     const handleKeyDown = (e) => {
-      console.log(e.key);
-      if (e.key === "a") {
-        // alert("a");
-        Player1Click();
-      } else if (e.key === "m") {
-        // alert("m");
-        Player2Click();
+      if (e.key === " " || e.key === "Spacebar") {
+        socket.emit("click");
       }
+      // else if (e.key === "m") {
+      //   // alert("m");
+      //   Player2Click();
+      // }
       window.removeEventListener("keypress", handleKeyDown);
     };
 
@@ -51,14 +64,18 @@ function Field() {
         style={{ width: `${100 + position}%` }}
         onClick={Player1Click}
       >
-        <span>{100 + position}</span>
+        <span>
+          {player === 1 ? "ME" : "P1"} : {100 + position}
+        </span>
       </div>
       <div
         className="player2"
         style={{ width: `${100 - position}%` }}
         onClick={Player2Click}
       >
-        <span>{100 - position}</span>
+        <span>
+          {player === 2 ? "ME" : "P2"} : {100 - position}
+        </span>
       </div>
 
       <div

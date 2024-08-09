@@ -23,6 +23,8 @@
   font-weight: 700;
   overflow: hidden;
   transition: all 0.2s;
+
+  white-space: nowrap;
 }
 
 .player2 {
@@ -37,6 +39,8 @@
   font-weight: 700;
   overflow: hidden;
   transition: all 0.2s;
+
+  white-space: nowrap;
 }
 
 /* .player1 span,
