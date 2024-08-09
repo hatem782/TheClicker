@@ -43,11 +43,6 @@
   white-space: nowrap;
 }
 
-/* .player1 span,
-.player2 span {
-  position: absolute;
-} */
-
 .score {
   width: 150px;
   transform: translateX(75px);
@@ -79,5 +74,86 @@
 }
 
 .reset {
+  width: 100% !important;
+}
+
+/* ################### VERTICAL ################### */
+
+.field-vert {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  position: relative;
+
+  overflow: hidden;
+}
+
+.player1-vert {
+  background-color: #012348;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: white;
+  font-family: Poppins;
+  font-weight: 700;
+  overflow: hidden;
+  transition: all 0.2s;
+
+  white-space: nowrap;
+}
+
+.player2-vert {
+  background-color: #ff5004;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: white;
+  font-family: Poppins;
+  font-weight: 700;
+  overflow: hidden;
+  transition: all 0.2s;
+
+  white-space: nowrap;
+}
+
+.score-vert {
+  width: 120px;
+  position: absolute;
+  transform: translateY(15px);
+  right: 0px;
+  z-index: 100;
+  height: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+.score-vert span {
+  font-size: 30px;
+  font-family: Poppins;
+  width: 50%;
+  display: block;
+  text-align: center;
+  position: absolute;
+  font-weight: 600;
+
+  background-color: white;
+}
+
+.reset-vert {
   width: 100% !important;
 }
