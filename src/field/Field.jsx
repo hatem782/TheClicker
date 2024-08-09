@@ -49,21 +49,15 @@ function Field({ socket }) {
   useEffect(() => {
     // if we click on space
     const handleKeyDown = (e) => {
-      if (e.key === "d") {
+      if (e.key === "Spacebar" || e.key === " ") {
         socket.emit("click");
       }
-      if (e.key === "Spacebar") {
-        socket.emit("click");
-      }
-      // else if (e.key === "m") {
-      //   // alert("m");
-      //   Player2Click();
-      // }
+
       window.removeEventListener("keyup", handleKeyDown);
     };
 
     window.addEventListener("keyup", handleKeyDown);
-  }, [position]);
+  }, []);
 
   return (
     <div className="field">
