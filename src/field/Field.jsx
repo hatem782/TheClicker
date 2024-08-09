@@ -52,7 +52,7 @@ function Field({ socket }) {
       if (e.key === "d") {
         socket.emit("click");
       }
-      if (e.key === " " || e.key === "Spacebar") {
+      if (e.key === "Spacebar") {
         socket.emit("click");
       }
       // else if (e.key === "m") {
